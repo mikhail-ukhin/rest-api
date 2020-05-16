@@ -1,6 +1,6 @@
-package storage
+package repository
 
 type configuration struct {
 	dbType string
-	dbName string
+	dbPath string
 }
