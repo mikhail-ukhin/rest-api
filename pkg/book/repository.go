@@ -2,14 +2,13 @@ package book
 
 import (
 	"REST-api/pkg/storage"
-	"database/sql"
 )
 
 type Repository interface {
 }
 
 type repository struct {
-	s storage.Storage
+	conf storage.configuration
 }
 
 func (r *repository) NewRepository(storage storage.Storage) Repository {
@@ -17,5 +16,5 @@ func (r *repository) NewRepository(storage storage.Storage) Repository {
 }
 
 func (r *repository) Get(id int32) (Book, error) {
-
+	return Book{}, nil
 }
