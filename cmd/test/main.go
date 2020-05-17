@@ -1,23 +1,35 @@
 package main
 
 import (
+	"fmt"
 	"rest-api/pkg/core"
 	"rest-api/pkg/repository"
 )
 
 func main() {
+	var ctx repository.DbContext
+	var bookRepo repository.BookRepository
 
-	repo, err := repository.NewRepository("sqlite3", ":memory:")
+	ctx = repository.NewContext("sqlite3", ":memory:")
+	bookRepo = repository.NewBookRepository(ctx)
 
-	if err != nil {
-		panic(err)
-	}
+	defer func() {
+		err := ctx.Close()
+
+		if err != nil {
+			panic("error on close connection")
+		}
+	}()
 
 	book := core.Book{
 		Name:        "Test",
 		Description: "Example",
 	}
 
-	repo.Add(&book)
+	bookRepo.Add(&book)
+
+	books, _ := bookRepo.GetAll()
+
+	fmt.Print(books)
 
 }

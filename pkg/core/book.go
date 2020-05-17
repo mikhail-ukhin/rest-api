@@ -12,16 +12,9 @@ type BookDTO struct {
 	Description string `json:"description"`
 }
 
-type BookRepository interface {
-	GetById(ID int64) (*Book, error)
-	Add(book *Book) error
-	Update(book *Book) (Book, error)
-	Remove(ID int64)
-}
-
 type BookService interface {
-	GetById(ID int64) (BookDTO, error)
-	Add(book BookDTO) error
-	Update(book *BookDTO) (BookDTO, error)
-	Remove(ID int64)
+	getById(ID int64) (BookDTO, error)
+	add(book BookDTO) error
+	update(book *BookDTO) (BookDTO, error)
+	remove(ID int64)
 }
